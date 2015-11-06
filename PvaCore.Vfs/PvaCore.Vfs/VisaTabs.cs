@@ -8,7 +8,7 @@ using PvaLibrary;
 
 namespace PvaCore.Vfs
 {
-    public class TaskTabs
+    public class VisaTabs
     {
 
         private readonly WebBrowser _webBrowser;
@@ -16,28 +16,28 @@ namespace PvaCore.Vfs
         private readonly Button _deleteButton;
         private readonly Button _renewButton;
         private readonly Button _restartButton;
-        private DataTypes _currentTaskDataTypes;
+        private VisaTask _currentTaskVisaTask;
         private bool _allowStep = true;
         private RotEvents _enum = RotEvents.Start;
         private readonly TabPage _tabPage;
         private int countIEErrors = 0;
         private int _countAttempt;
         private int _countOperation;
-        private readonly DataTypesComparer _dataTypesComparer = new DataTypesComparer();
+        private readonly VisaTaskComparer _visaTaskComparer = new VisaTaskComparer();
         private readonly ProxyHelper _proxyHelper = new ProxyHelper();
 
         public bool IsTabExists { get; set; }
-        public List<DataTypes> TasksDataTypes = new List<DataTypes>();
+        public List<VisaTask> TasksDataTypes = new List<VisaTask>();
         public delegate void GetNextProxyDelegate();
         public event GetNextProxyDelegate GetNextProxyEvent;
 
 
         // Initialize class
-        public TaskTabs()
+        public VisaTabs()
         {
         }
 
-        public TaskTabs(DataTypes taskDataTypes, TabPage taskTabPage)
+        public VisaTabs(VisaTask taskVisaTask, TabPage taskTabPage)
         {
 
         }
