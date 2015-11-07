@@ -19,7 +19,7 @@ namespace PvaCore.Vfs
     public partial class PvaMainWindow : Form
     {
         private static string _userEmailDomain = "vedev.in.ua";
-        private BindingList<DataTypes> _dataTypeses;
+        private BindingList<VisaTask> _dataTypeses;
         private Engine _engine;
 
         public sealed override string Text

@@ -119,7 +119,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTypes.cs" />
+    <Compile Include="VisaTask.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="PvaMainWindow.cs">
       <SubType>Form</SubType>
@@ -129,7 +129,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskTabs.cs" />
+    <Compile Include="VisaTabs.cs" />
     <Compile Include="VpaPolandDbDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

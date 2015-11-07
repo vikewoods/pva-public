@@ -8,7 +8,7 @@ using PvaLibrary;
 
 namespace PvaCore.Vfs
 {
-    public class DataTypes
+    public class VisaTask
     {
         public enum VisaEntityType
          {
@@ -90,9 +90,9 @@ namespace PvaCore.Vfs
             return sx.ToString();
         }
         // Clone section
-        public DataTypes Clone()
+        public VisaTask Clone()
         {
-            var dt = new DataTypes
+            var dt = new VisaTask
             {
                 ArrivalDt = ArrivalDt,
                 Category = Category,
@@ -121,22 +121,22 @@ namespace PvaCore.Vfs
             return dt;
         }
     }
-    public class DataTypesComparer : IComparer<DataTypes>
+    public class VisaTaskComparer : IComparer<VisaTask>
     {
-        public int Compare(DataTypes dataTypesX, DataTypes dataTypesY)
+        public int Compare(VisaTask visaTaskX, VisaTask visaTaskY)
         {
-            if (dataTypesX.RedLineDt > dataTypesY.RedLineDt)
+            if (visaTaskX.RedLineDt > visaTaskY.RedLineDt)
                 return 1;
-            if (dataTypesX.RedLineDt < dataTypesY.RedLineDt)
+            if (visaTaskX.RedLineDt < visaTaskY.RedLineDt)
                 return -1;
-            if (dataTypesX.Priority > dataTypesY.Priority)
+            if (visaTaskX.Priority > visaTaskY.Priority)
                 return -1;
-            if (dataTypesX.Priority < dataTypesY.Priority)
+            if (visaTaskX.Priority < visaTaskY.Priority)
                 return 1;
             return 0;
         }
     }
-    public class DataTypesSql
+    public class VisaTaskSql
     {
 
         private const string ConnectionUri = "Data Source=vpa.cloudapp.net;Initial Catalog=VpaPolandDb;Persist Security Info=True;User ID=sa;Password=Casper159357*0;Pooling=False";

@@ -11,43 +11,39 @@ namespace PvaCore.Vfs
 {
     public class Engine
     {
-        private BindingList<DataTypes> _dataTypeses;
-        private Dictionary<string, TaskTabs> _tabTasks;
-        //private Dictionary<string, VisaTab> _cityTasks;
+        private BindingList<VisaTask> _visaTasks;
+        private Dictionary<string, VisaTabs> _cityTasks;
         private bool _isMainThread = false;
         private TabControl _tabControl;
         private Timer _timer;
 
-        public static Dictionary<TabPage, Color> TabColors = new Dictionary<TabPage, Color>();
+        private static Dictionary<TabPage, Color> TabColors = new Dictionary<TabPage, Color>();
 
-        public Engine(BindingList<DataTypes> dataTypeses, TabControl tabControl, bool isMainThread)
+        public Engine(BindingList<VisaTask> visaTasks, TabControl tabControl, bool isMainThread)
         {
             _isMainThread = isMainThread;
             _tabControl = tabControl;
-            _dataTypeses = dataTypeses;
-            _tabTasks = new Dictionary<string, TaskTabs>();
+
+            _visaTasks = visaTasks;
+            _cityTasks = new Dictionary<string, VisaTabs>();
 
             _timer = new Timer {Interval = 1500};
             _timer.Tick += TimerOnTick;
         }
 
-        private void SetTabHeader(TabPage page, Color color)
-        {
-            TabColors[page] = color;
-            _tabControl.Invalidate();
-        }
+        
         public void RefreshViewTab()
         {
-            var dtT = new DataTypes
+            var dtT = new VisaTask
             {
                 City = "Львов",
                 CityCode = "1"
             };
-            _dataTypeses = new BindingList<DataTypes> {dtT};
+            _visaTasks = new BindingList<VisaTask> {dtT};
 
-            foreach (var dt in _dataTypeses)
+            foreach (var dt in _visaTasks)
             {
-                if (!_tabTasks.ContainsKey(dt.CityV))
+                if (!_cityTasks.ContainsKey(dt.CityV))
                 {
                     // Create UI tab first
                     var tabPage = new TabPage(dt.CityV) {Name = dt.CityV};
@@ -68,14 +64,15 @@ namespace PvaCore.Vfs
                         Location = new Point(0, 0),
                         Size = new Size(1000, 130),
                         Dock = DockStyle.Bottom,
-                        Name = "logTxtBox"
+                        Name = "logTxtBox" + dt.CityCode
                     };
                     tabPage.Controls.Add(logTxtBox);
 
                     SetTabHeader(tabPage, Color.Chartreuse);
                     _tabControl.TabPages.Add(tabPage);
 
-                    //DataTypes visaTab = new DataTypes(dt, tabPage);
+                    VisaTabs visaTab = new VisaTabs(dt, tabPage);
+                    _cityTasks.Add(dt.CityV, visaTab);
                 }
                 else
                 {
@@ -83,12 +80,18 @@ namespace PvaCore.Vfs
                 }
             }
 
-            foreach (KeyValuePair<string, TaskTabs> pair in _tabTasks)
+            foreach (KeyValuePair<string, VisaTabs> pair in _cityTasks)
             {
                 
             }
         }
 
+        // UI Misc. functions
+        private void SetTabHeader(TabPage page, Color color)
+        {
+            TabColors[page] = color;
+            _tabControl.Invalidate();
+        }
 
         // Events section
         private void TimerOnTick(object sender, EventArgs eventArgs)
